@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrAL info</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #menuContainer {
+            background-color: transparent;
+            transition: background-color 0.3s;
+        }
+        
+        .disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <!----------------------------------------------------------->
+    <!--------------------------- TITULO ------------------------>
+    <!----------------------------------------------------------->
+    <header class="position-relative text-white text-center d-flex align-items-center justify-content-center" style="height: 500px;">
+        <img src="../Irudiak/Informatika-Fakultatea_cabecera_web.jpg" alt="Imagen de cabecera" class="img-fluid w-100 h-100" style="object-fit: cover; position: absolute; top: 0; left: 0;">
+        
+        <!-- Overlay negro con baja opacidad -->
+        <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+        
+        <!-- Título y subtítulo centrados -->
+        <div class="position-relative" style="z-index: 1;">
+            <h1>Egutegia</h1>
+            <h4>2024-2025</h4>
+        </div>
+    </header>
+
+
+
+
+
+    <!----------------------------------------------------------->
+    <!----------------------- BARRA SUPERIOR -------------------->
+    <!----------------------------------------------------------->
+    <div id="menuContainer" class="position-fixed top-0 start-0 w-100 d-flex align-items-center" style="z-index: 1000;">
+        <a href="#" class="m-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu">
+            <img src="../Irudiak/icons8-menú-50.png" alt="Botón de menú" class="d-block" style="width: 40px; height: 40px;">
+        </a>
+        <a href="hasiera.html" class="m-3">
+            <img src="../Irudiak/ehu.png" alt="Botón de inicio" class="d-block" style="height: 40px;">
+        </a>
+    </div> 
+
+    <script>
+        window.addEventListener('scroll', function() {
+            var menuContainer = document.getElementById('menuContainer');
+            if (window.scrollY > 0) {
+                menuContainer.style.backgroundColor = '#282828';
+            } else {
+                menuContainer.style.backgroundColor = 'transparent';
+            }
+        });
+    </script>
+
+
+
+    <!----------------------------------------------------------->
+    <!------------------------- DESPLEGABLE --------------------->
+    <!----------------------------------------------------------->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel" style="background-color: #282828;">
+        <div class="offcanvas-header">
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar" ></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-unstyled" style="color:white;">
+                <li><a href="hasiera.html" class="nav-link" style=" padding-left:30px;padding-bottom:20px">Hasiera</a></li>
+                <li><a href="informazioa.html" class="nav-link"  style=" padding-left:30px;padding-bottom:20px">Informazioa</a></li>
+                <li><a href="egutegia.html" class="nav-link" style=" color:#f9338f;padding-left:30px;padding-bottom:20px">Egutegia</a></li>
+                <li><a href="arautegia.html" class="nav-link" style=" padding-left:30px;padding-bottom:20px">Araudia</a></li>
+                <li><a href="jarraibideak.html" class="nav-link" style=" padding-left:30px;padding-bottom:20px">Jarraibideak</a></li>
+                <li><a href="memoria.html" class="nav-link" style=" padding-left:30px;padding-bottom:20px">Memoria</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    <!----------------------------------------------------------->
+    <!--------------------------- CUERPO ------------------------>
+    <!----------------------------------------------------------->
+    <div class="container my-5">
+        <div class="d-none d-md-block w-100">
+            <img src="../Irudiak/egutegiaTop.png" alt="Egutegia" class="img-fluid" style="object-fit: cover; top: 0; left: 0;">
+        </div>
+        <!-- Div para pantallas pequeñas -->
+        <div class="d-block d-md-none w-100 text-center" style="height:300px;">
+            <button id="GoikoLeftButton" class="btn btn-primary disabled" onclick="changeGoran('left')"> < </button>
+            <img id="leyenda" src="../Irudiak/ikasleak.png" alt="leyenda" class="img-fluid mx-3" style="width:50vw;object-fit: cover; top: 0; left: 0;">
+            <button id="GoikoRightButton" class="btn btn-primary" onclick="changeGoran('right')"> > </button>
+        </div>
+        <div class="d-block d-md-none w-100 text-center" style="height:300px;">
+            <button id="BehekoLeftButton" class="btn btn-primary disabled" onclick="changeBeheran('left')"> < </button>
+            <img id="egutegiaSmall" src="../Irudiak/1deialdia.png" alt="EgutegiaSmall" class="img-fluid mx-3" style="width:50vw;object-fit: cover; top: 0; left: 0;">
+            <button id="BehekoRightButton" class="btn btn-primary" onclick="changeBeheran('right')"> > </button>
+        </div>
+    </div>
+
+    <!-- Enlace a Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function changeGoran(direction) {
+            var mainImage = document.getElementById('leyenda');
+            var leftButton = document.getElementById('GoikoLeftButton');
+            var rightButton = document.getElementById('GoikoRightButton');
+
+            if (direction === 'right') {
+                if (mainImage.src.includes('ikasleak')) {
+                    mainImage.src = '../Irudiak/zuzendaria.png';
+                    leftButton.classList.remove('disabled');
+                } else if (mainImage.src.includes('zuzendaria')) {
+                    mainImage.src = '../Irudiak/epaimaia.png';
+                    rightButton.classList.add('disabled');
+                }
+            } else if (direction === 'left') {
+                if(mainImage.src.includes('epaimaia')) {
+                    mainImage.src = '../Irudiak/zuzendaria.png';
+                    rightButton.classList.remove('disabled');
+                } else if (mainImage.src.includes('zuzendaria')) {
+                    mainImage.src = '../Irudiak/ikasleak.png';
+                    leftButton.classList.remove('disabled');
+                }
+            }
+        }
+        function changeBeheran(direction) {
+            var mainImage = document.getElementById('egutegiaSmall');
+            var leftButton = document.getElementById('BehekoLeftButton');
+            var rightButton = document.getElementById('BehekoRightButton');
+
+            if (direction === 'right') {
+                if (mainImage.src.includes('1deialdia')) {
+                    mainImage.src = '../Irudiak/2deialdia.png';
+                    leftButton.classList.remove('disabled');
+                } else if (mainImage.src.includes('2deialdia')) {
+                    mainImage.src = '../Irudiak/3deialdia.png';
+                } else if (mainImage.src.includes('3deialdia')) {
+                    mainImage.src = '../Irudiak/4deialdia.png';
+                    rightButton.classList.add('disabled');
+                }
+            } else if (direction === 'left') {
+                if (mainImage.src.includes('4deialdia')) {
+                    mainImage.src = '../Irudiak/3deialdia.png';
+                    rightButton.classList.remove('disabled');
+                } else if (mainImage.src.includes('3deialdia')) {
+                    mainImage.src = '../Irudiak/2deialdia.png';
+                } else if (mainImage.src.includes('2deialdia')) {
+                    mainImage.src = '../Irudiak/1deialdia.png';
+                    leftButton.classList.add('disabled');
+                }
+            }
+        }
+    </script>
+    
+
+
+    <!-- Enlace a Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
